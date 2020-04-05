@@ -2,7 +2,7 @@
 Code to recreate a bug in Avalonia TreeView v0.9.7
 
 
-When I try to re-add an item to a Parent that was previously removed create an exception in `TreeContainerIndex.Add` in the line `this._containerToItem.Add(container, item);`
+Re-adding an item to a Parent that was previously removed creates an exception in `TreeContainerIndex.Add` in the line `this._containerToItem.Add(container, item);`
 
 To Reproduce:
 - Add Parent1 instance
