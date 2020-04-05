@@ -1,0 +1,36 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:AvaloniaTreeViewBug;assembly=AvaloniaTreeViewBug"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="AvaloniaTreeViewBug.MainWindow"
+		Title="AvaloniaTreeViewBug">
+	<Grid ColumnDefinitions="*,*,2*" Margin="10" RowDefinitions="*,Auto">
+		<Grid RowDefinitions="Auto,*">
+			<TextBlock Text="Next Items (ListBox):" Margin="5" />
+			<ListBox Items="{Binding NextItems}" Margin="5" Grid.Row="1"/>
+		</Grid>
+		<Grid RowDefinitions="Auto,*" Grid.Column="1">
+			<TextBlock Text="Previous Items (ListBox):" Margin="5" />
+			<ListBox Items="{Binding PreviousItems}" Margin="5" Grid.Row="1"/>
+		</Grid>
+		<Grid RowDefinitions="Auto,*" Grid.Column="2">
+			<TextBlock Text="Items (TreeView):" Margin="5" />
+			<TreeView Items="{Binding Items}" x:Name="TV" Margin="5" Grid.Row="1">
+				<TreeView.DataTemplates>
+					<TreeDataTemplate DataType="local:ParentObj" ItemsSource="{Binding Children}">
+						<TextBlock Text="{Binding Description}"/>
+					</TreeDataTemplate>
+					<DataTemplate DataType="local:ChildObj">
+						<TextBlock Text="{Binding Description}"/>
+					</DataTemplate>
+				</TreeView.DataTemplates>
+			</TreeView>
+		</Grid>
+		<StackPanel Grid.Row="1" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Content="Previous" Width="75" Margin="10" Command="{Binding MovePrevious}" IsEnabled="{Binding CanMovePrevious}"/>
+			<Button Content="Next" Width="75" Margin="10" Command="{Binding MoveNext}" IsEnabled="{Binding CanMoveNext}"/>
+		</StackPanel>
+	</Grid>
+</Window>
